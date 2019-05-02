@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-// TODO: Fetch
 public class IteratorExample {
 
 	List<Integer> intList;
