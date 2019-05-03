@@ -1,9 +1,6 @@
 package binarytree;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class BinaryTree {
 
@@ -56,45 +53,38 @@ public class BinaryTree {
 		Queue<Node> q = new LinkedList<Node>();
 		q.offer(root);
 		int level = 0;
-		System.out.println("Node: "+ current.value);
+		System.out.println(current.value);
 		while(!q.isEmpty()) {
 			level++;
 			int loop = q.size();
+			List<Integer> list = new ArrayList<>();
 			for(int i=0; i<loop; i++) {
 				current = q.poll();
 				if(level % 2 != 0) {
-					if(current.left != null) {
-						System.out.println(current.left.value);
-					} if(current.right != null) {
-						System.out.println(current.right.value);
-					}
-
 					if(current.right != null) {
 						q.offer(current.right);
+						list.add(current.right.value);
 					} if(current.left != null) {
 						q.offer(current.left);
+						list.add(current.left.value);
 					}
-
 				} else {
-					if(current.right != null) {
-						System.out.println(current.right.value);
-					}
-					if(current.left != null) {
-						System.out.println(current.left.value);
-					}
-
 					if(current.left != null) {
 						q.offer(current.left);
+						list.add(current.left.value);
 					}
 					if(current.right != null) {
 						q.offer(current.right);
+						list.add(current.right.value);
 					}
 				}
 			}
+			Collections.reverse(list);
+			list.forEach(e-> System.out.println(e));
 		}
 	}
 
-	public void displayBFS(Node root) {
+	public void displayBT(Node root) {
 		if(root == null) {
 			System.out.println("Nothing to display");
 			return;
@@ -124,6 +114,35 @@ public class BinaryTree {
 		}
 	}
 
+	public List<List<Integer>> zigzagLevelOrder(Node root) {
+		List<List<Integer>> rst = new ArrayList<>();
+		if (root == null) return rst;
+
+		int level = 0, size = 0;
+		Queue<Node> queue = new LinkedList<>();
+		queue.offer(root);
+
+		while (!queue.isEmpty()) {
+			size = queue.size();
+			ArrayList<Integer> list = new ArrayList<>();
+			for (int i = 0 ; i < size; i++) {
+				Node node = queue.poll();
+				list.add(node.value);
+				if (level % 2 == 0) {
+					if (node.left != null) queue.offer(node.left);
+					if (node.right != null) queue.offer(node.right);
+				} else {
+					if (node.right != null) queue.offer(node.right);
+					if (node.left != null) queue.offer(node.left);
+				}
+			}
+			level++;
+			rst.add(list);
+		}
+
+		return rst;
+	}
+
 	public void inOrder(Node root) {
 		if(root.left != null) inOrder(root.left);
 		System.out.print(root.value + " ");
@@ -140,10 +159,21 @@ public class BinaryTree {
 		bt.insert(17, "F");
 		bt.insert(18, "G");
 		bt.insert(19, "H");
+		bt.insert(20, "I");
+		bt.insert(21, "J");
+		bt.insert(22, "K");
+		bt.insert(23, "L");
+		bt.insert(24, "M");
+		bt.insert(25, "N");
+		bt.insert(26, "O");
+		bt.insert(27, "P");
+
 		//bt.inOrder(bt.root);
-		bt.displayBFS(bt.root);
-		System.out.println("**********************************Zig-Zag");
+		bt.displayBT(bt.root);
+		System.out.println("**********************************Zig-Zag1");
 		bt.displayZigZag(bt.root);
+		System.out.println("**********************************Zig-Zag2");
+		System.out.println(bt.zigzagLevelOrder(bt.root));
 	}
 
 }

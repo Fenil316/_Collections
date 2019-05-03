@@ -19,7 +19,6 @@ public class MyLinkedList {
 		List<String> list1 = new LinkedList<>();
 		list1.add("Fenil");
 		list1.add("Stavan");
-		list1.add("Rinkle");
 		list1.add("mummy");
 		list1.add(1, "Hajmola");
 		list1.add(1, "Hajmola2");
@@ -31,7 +30,6 @@ public class MyLinkedList {
 		List<String> list2 = new ArrayList<String>();
 		list2.add("Fenil");
 		list2.add("Stavan");
-		list2.add("Rinkle");
 		list2.add("mummy");
 		list2.add(1, "Hajmola");
 		list2.add(3, "udupi");
